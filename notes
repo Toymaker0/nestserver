@@ -1,0 +1,4 @@
+See knex and sequelize 
+
+knex --> for query builder 
+sequelize --> for object relational maping
