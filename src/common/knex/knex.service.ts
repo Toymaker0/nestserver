@@ -17,6 +17,7 @@ export class KnexService implements OnModuleInit {
   }
   async onModuleInit() {
     try {
+      await this.db.raw('SELECT 1+1 AS result');
       console.log('Knex connected successfully');
     } catch (err) {
       console.error('Knex connection failed:', err);

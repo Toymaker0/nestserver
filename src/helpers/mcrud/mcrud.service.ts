@@ -3,7 +3,9 @@ import { KnexService } from 'src/common/knex/knex.service';
 
 @Injectable()
 export class McrudService {
-    constructor(private knex: KnexService) { }
+    constructor(private knex: KnexService) {
+        
+     }
 
 
     create(table, datas) {
@@ -28,8 +30,8 @@ export class McrudService {
         return this.knex.db.select(select).from(table);
     }
 
-    async get(select: any = "*", table, condition = null) {
-        return await this.knex.db.select(select).from(table).where(condition).first();
+    async get(select: any , table, condition = null) {
+        return await this.knex.getClient().select(select).from(table).first();
         // return result ?? false;
     }
 

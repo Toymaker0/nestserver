@@ -9,11 +9,19 @@ import { McrudService } from './helpers/mcrud/mcrud.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { SelectionAreaModule } from './modules/selection-area/selection-area.module';
 import { BillingModule } from './modules/billing/billing.module';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
 
 const models=[User]
 
 @Module({
-  imports: [SequelizeModule.forRoot({
+  imports: [
+    PassportModule,
+    JwtModule.register({
+      secret: process.env.JWT_SECRET || 'supersecret',
+      signOptions: { expiresIn: '1h' },
+    }),
+    SequelizeModule.forRoot({
       dialect: 'mariadb',
       host: 'localhost', 
       port: 3309,
@@ -21,7 +29,7 @@ const models=[User]
       database: 'crud',
       models: [...models],
       autoLoadModels: true,
-      // synchronize: true,
+      synchronize: true,
     }), AuthModule, SelectionAreaModule, BillingModule,],
   controllers: [AppController],
   providers: [AppService, KnexService, SequelizeService, McrudService],

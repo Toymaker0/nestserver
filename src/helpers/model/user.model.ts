@@ -9,6 +9,15 @@ export class User extends Model {
   @Column
   lastName: string;
 
+  @Column
+  usrName: string;
+
+  @Column
+  password: string;
+
+  @Column
+  role: string;
+
   @Column({ defaultValue: true })
   isActive: boolean;
 }
